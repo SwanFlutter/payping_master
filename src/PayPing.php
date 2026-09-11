@@ -1,17 +1,18 @@
 <?php
 
-namespace ShareXOS\PayPing;
+namespace SwanFlutter\PayPing;
 
-use ShareXOS\PayPing\Services\PaymentService;
-use ShareXOS\PayPing\Services\InvoiceService;
-use ShareXOS\PayPing\Services\CustomerService;
-use ShareXOS\PayPing\Services\ProductService;
-use ShareXOS\PayPing\Services\ReportService;
-use ShareXOS\PayPing\Services\InquiryService;
-use ShareXOS\PayPing\Services\WithdrawService;
-use ShareXOS\PayPing\Services\BnplService;
-use ShareXOS\PayPing\Services\PermaLinkService;
-use ShareXOS\PayPing\Services\CouponService;
+use SwanFlutter\PayPing\Services\PaymentService;
+use SwanFlutter\PayPing\Services\InvoiceService;
+use SwanFlutter\PayPing\Services\CustomerService;
+use SwanFlutter\PayPing\Services\ProductService;
+use SwanFlutter\PayPing\Services\ReportService;
+use SwanFlutter\PayPing\Services\InquiryService;
+use SwanFlutter\PayPing\Services\WithdrawService;
+use SwanFlutter\PayPing\Services\BnplService;
+use SwanFlutter\PayPing\Services\PermaLinkService;
+use SwanFlutter\PayPing\Services\CouponService;
+use SwanFlutter\PayPing\Services\UploadService;
 
 class PayPing
 {
@@ -75,6 +76,11 @@ class PayPing
     public function coupon(): CouponService
     {
         return $this->getService('coupon', CouponService::class);
+    }
+
+    public function upload(): UploadService
+    {
+        return $this->getService('upload', UploadService::class);
     }
 
     private function getService(string $name, string $class)

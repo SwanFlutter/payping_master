@@ -1,39 +1,62 @@
 {
-  "name": "sharexos/payping",
+  "name": "swanflutter/payping",
   "description": "Comprehensive PayPing API v3 Package for PHP and Laravel",
   "type": "library",
   "license": "MIT",
-  "version": "1.1.0",
+  "keywords": [
+    "payping",
+    "payment",
+    "gateway",
+    "iran",
+    "laravel",
+    "php"
+  ],
+  "homepage": "https://github.com/SwanFlutter/payping_master",
   "authors": [
     {
-      "name": "ShareXOS Team",
-      "email": "support@sharexos.ir"
+      "name": "Swan Flutter",
+      "homepage": "https://github.com/SwanFlutter"
     }
   ],
+  "support": {
+    "issues": "https://github.com/SwanFlutter/payping_master/issues",
+    "source": "https://github.com/SwanFlutter/payping_master"
+  },
   "require": {
     "php": ">=8.1",
     "ext-curl": "*",
     "ext-json": "*",
-    "illuminate/support": "^9.0|^10.0|^11.0"
+    "illuminate/support": "^9.0|^10.0|^11.0|^12.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
+    "phpunit/phpunit": "^9.5|^10.0",
     "mockery/mockery": "^1.5"
   },
   "autoload": {
     "psr-4": {
-      "ShareXOS\\PayPing\\": "src/"
+      "SwanFlutter\\PayPing\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SwanFlutter\\PayPing\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
   },
   "extra": {
     "laravel": {
       "providers": [
-        "ShareXOS\\PayPing\\Laravel\\PayPingServiceProvider"
+        "SwanFlutter\\PayPing\\Laravel\\PayPingServiceProvider"
       ],
       "aliases": {
-        "PayPing": "ShareXOS\\PayPing\\Laravel\\Facades\\PayPing"
+        "PayPing": "SwanFlutter\\PayPing\\Laravel\\Facades\\PayPing"
       }
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "config": {
+    "sort-packages": true
+  }
 }

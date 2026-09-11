@@ -1,6 +1,6 @@
 <?php
 
-namespace ShareXOS\PayPing;
+namespace SwanFlutter\PayPing;
 
 class PayPingException extends \Exception
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace ShareXOS\PayPing\Tests;
+namespace SwanFlutter\PayPing\Tests;
 
 use PHPUnit\Framework\TestCase;
-use ShareXOS\PayPing\PayPing;
-use ShareXOS\PayPing\Services\PaymentService;
-use ShareXOS\PayPing\Services\InvoiceService;
+use SwanFlutter\PayPing\PayPing;
+use SwanFlutter\PayPing\Services\PaymentService;
+use SwanFlutter\PayPing\Services\InvoiceService;
 
 class PayPingTest extends TestCase
 {

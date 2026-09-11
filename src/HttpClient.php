@@ -1,6 +1,6 @@
 <?php
 
-namespace ShareXOS\PayPing;
+namespace SwanFlutter\PayPing;
 
 class HttpClient
 {
@@ -53,6 +53,38 @@ class HttpClient
 
         curl_setopt_array($curl, $options);
 
+        return $this->handleResponse($curl);
+    }
+
+    /**
+     * ارسال فرم multipart (آپلود فایل) — مقادیر آرایه می‌توانند CURLFile باشند.
+     *
+     * @throws PayPingException
+     */
+    public function upload(string $url, array $fields, array $headers = []): array
+    {
+        $curl = curl_init();
+
+        $options = [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => array_merge([
+                'Accept: application/json',
+                'Authorization: Bearer ' . $this->token,
+            ], $headers),
+            CURLOPT_TIMEOUT => $this->timeout,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_POSTFIELDS => $fields,
+        ];
+
+        curl_setopt_array($curl, $options);
+
+        return $this->handleResponse($curl);
+    }
+
+    private function handleResponse($curl): array
+    {
         $response = curl_exec($curl);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $curlErr = curl_error($curl);

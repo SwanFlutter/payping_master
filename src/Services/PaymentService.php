@@ -1,6 +1,6 @@
 <?php
 
-namespace ShareXOS\PayPing\Services;
+namespace SwanFlutter\PayPing\Services;
 
 class PaymentService extends BaseService
 {
@@ -42,5 +42,19 @@ class PaymentService extends BaseService
     public function unblock(array $data): array
     {
         return $this->client->request('POST', $this->buildUrl('v3', 'pay/unblock'), $data);
+    }
+
+    /**
+     * ارسال اطلاعات پرداخت به پذیرنده — معمولاً به صورت خودکار توسط PayPing
+     * پس از بازگشت از درگاه فراخوانی می‌شود و نیاز به فراخوانی از سمت پذیرنده نیست.
+     */
+    public function paid(int $refId, string $paymentCode): array
+    {
+        return $this->client->request('GET', $this->buildUrl('v3', "pay/paid/{$refId}/{$paymentCode}"));
+    }
+
+    public function paidNotify(int $refId, string $paymentCode): array
+    {
+        return $this->client->request('POST', $this->buildUrl('v3', "pay/paid/{$refId}/{$paymentCode}"));
     }
 }

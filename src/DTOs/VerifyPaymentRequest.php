@@ -1,14 +1,14 @@
 <?php
 
-namespace ShareXOS\PayPing\DTOs;
+namespace SwanFlutter\PayPing\DTOs;
 
 class VerifyPaymentRequest
 {
     private int    $amount;
     private string $paymentCode;
-    private string $paymentRefId;
+    private int    $paymentRefId;
 
-    public function __construct(int $amount, string $paymentCode, string $paymentRefId)
+    public function __construct(int $amount, string $paymentCode, int $paymentRefId)
     {
         $this->amount       = $amount;
         $this->paymentCode  = $paymentCode;

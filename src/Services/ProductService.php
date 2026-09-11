@@ -1,6 +1,6 @@
 <?php
 
-namespace ShareXOS\PayPing\Services;
+namespace SwanFlutter\PayPing\Services;
 
 class ProductService extends BaseService
 {

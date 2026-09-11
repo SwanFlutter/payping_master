@@ -1,9 +1,9 @@
 <?php
 
-namespace ShareXOS\PayPing\Laravel;
+namespace SwanFlutter\PayPing\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use ShareXOS\PayPing\PayPing;
+use SwanFlutter\PayPing\PayPing;
 
 class PayPingServiceProvider extends ServiceProvider
 {

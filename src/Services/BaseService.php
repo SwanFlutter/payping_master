@@ -1,8 +1,8 @@
 <?php
 
-namespace ShareXOS\PayPing\Services;
+namespace SwanFlutter\PayPing\Services;
 
-use ShareXOS\PayPing\HttpClient;
+use SwanFlutter\PayPing\HttpClient;
 
 abstract class BaseService
 {

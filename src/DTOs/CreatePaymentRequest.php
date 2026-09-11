@@ -1,6 +1,6 @@
 <?php
 
-namespace ShareXOS\PayPing\DTOs;
+namespace SwanFlutter\PayPing\DTOs;
 
 class CreatePaymentRequest
 {
