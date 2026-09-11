@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [1.1.1] — 2026-09-11
+
+### Fixed
+- رفع مشکل زنجیرهٔ وابستگی که نصب روی PHP 8.1 را ناممکن می‌کرد (`illuminate/support 12` → `nesbot/carbon ^3.8.4` → `symfony/clock ^8.x`)
+- پین کردن پلتفرم Composer روی PHP 8.1.0 در `composer.json` تا همیشه نسخه‌های سازگار با PHP 8.1 حلولاسیون شوند
+- بازتولید `composer.lock` با `illuminate/support v10.49.0` و `nesbot/carbon 2.73.0` (بدون `symfony/clock`)
+
 ## [1.1.0] — 2026-09-10
 
 ### Added
