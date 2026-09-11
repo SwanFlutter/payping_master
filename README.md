@@ -17,6 +17,28 @@
 composer require swanflutter/payping
 ```
 
+## مستندات کامل
+
+مستندات هر سرویس به صورت جداگانه در پوشه [`docs/`](docs/) نوشته شده است:
+
+| سرویس | مستندات |
+|-------|---------|
+| پرداخت (v3) — ایجاد، تأیید، تسهیم، برگشت وجه | [docs/payment.md](docs/payment.md) |
+| فاکتور (v2) — شامل فاکتور سریع و زمان‌بندی | [docs/invoice.md](docs/invoice.md) |
+| مشتریان | [docs/customer.md](docs/customer.md) |
+| محصولات | [docs/product.md](docs/product.md) |
+| کوپن تخفیف | [docs/coupon.md](docs/coupon.md) |
+| لینک پرداخت ثابت | [docs/permalink.md](docs/permalink.md) |
+| برداشت وجه | [docs/withdraw.md](docs/withdraw.md) |
+| گزارش تراکنش‌ها | [docs/report.md](docs/report.md) |
+| استعلام‌های بانکی، هویتی و خدماتی | [docs/inquiry.md](docs/inquiry.md) |
+| خرید اقساطی (BNPL) | [docs/bnpl.md](docs/bnpl.md) |
+| آپلود فایل | [docs/upload.md](docs/upload.md) |
+| راهنمای Laravel | [docs/laravel.md](docs/laravel.md) |
+| مدیریت خطا و تنظیمات پیشرفته | [docs/exceptions.md](docs/exceptions.md) |
+
+تاریخچه تغییرات: [CHANGELOG.md](CHANGELOG.md)
+
 ## استفاده (PHP خالص)
 
 ### ایجاد پرداخت
