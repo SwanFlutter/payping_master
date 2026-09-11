@@ -14,7 +14,7 @@
 ## نصب
 
 ```bash
-composer require swanflutter/payping
+composer require swanflutter/payping-master
 ```
 
 ## مستندات کامل
