@@ -4,6 +4,10 @@
 [![License](https://img.shields.io/packagist/l/swanflutter/payping.svg)](https://packagist.org/packages/swanflutter/payping)
 [![PHP Version](https://img.shields.io/packagist/php-v/swanflutter/payping.svg)](https://packagist.org/packages/swanflutter/payping)
 
+
+<img width="1584" height="396" alt="payping_cover" src="https://github.com/user-attachments/assets/28b8b314-5add-40bc-b6c6-31e9333a5729" />
+
+
 پکیج PHP برای درگاه پرداخت **PayPing API v3** — بدون وابستگی به فریم‌ورک، با پشتیبانی کامل از Laravel.
 
 - ✅ پرداخت و تأیید پرداخت (v3)
