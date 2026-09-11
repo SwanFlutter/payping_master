@@ -94,12 +94,19 @@ exit;
 
 ## تأیید پرداخت (callback)
 
-PayPing پس از بازگشت کاربر، اطلاعات پرداخت را با فرمت `application/x-www-form-urlencoded` به `returnUrl` شما POST می‌کند:
+PayPing v3 پس از بازگشت کاربر، اطلاعات پرداخت را با فرمت `application/x-www-form-urlencoded` به `returnUrl` شما POST می‌کند.
+فیلدهای اصلی سطح بالا عبارت‌اند از:
 
 | فیلد | توضیح |
 |------|-------|
 | `status` | `1` = موفق، `0` = عدم پرداخت |
 | `errorCode` | کد خطا (در پرداخت موفق خالی است) |
+| `data` | **JSON-String** حاوی جزئیات پرداخت (جدول زیر) |
+
+فیلدهای داخل JSON فیلد `data`:
+
+| فیلد | توضیح |
+|------|-------|
 | `clientRefId` | شناسه ارجاع پذیرنده |
 | `paymentCode` | کد پرداخت |
 | `paymentRefId` | کد رهگیری (فقط در پرداخت موفق) |
@@ -107,18 +114,32 @@ PayPing پس از بازگشت کاربر، اطلاعات پرداخت را ب�
 | `gatewayAmount` | مبلغ نهایی پرداخت |
 | `cardNumber` / `cardHashPan` | شماره کارت پرداخت‌کننده (ممکن است ارسال نشود) |
 
+نمونهٔ `$_POST` دریافتی:
+
+```php
+[
+    'status'    => '1',
+    'errorCode' => '',
+    'data'      => '{"clientRefId":"TEST-ORDER-123","paymentCode":"...","paymentRefId":2166036136,"amount":1000,"gatewayAmount":1000}',
+]
+```
+
+⚠️ **توجه:** فیلدهایی مثل `clientRefId` و `paymentCode` مستقیماً در `$_POST` وجود ندارند — داخل JSON فیلد `data` هستند. از `CallbackParser` (کد زیر) استفاده کنید.
+
 ⚠️ **نکته امنیتی:** حتماً `clientRefId` را در دیتابیس خود جستجو کنید و صحت `paymentCode` و `amount` را با رکورد سفارش مقایسه کنید. در صورت مغایرت، تراکنش را تأیید نکنید.
 
 ```php
+use SwanFlutter\PayPing\CallbackParser;
 use SwanFlutter\PayPing\PayPingException;
 
-$status = (int)($_POST['status'] ?? 0);
-if ($status !== 1) {
+$callback = CallbackParser::fromGlobals();
+
+if (!CallbackParser::isSuccessful($callback)) {
     die('پرداخت لغو شد');
 }
 
-$paymentRefId = (int)($_POST['paymentRefId'] ?? 0);
-$paymentCode  = trim($_POST['paymentCode'] ?? '');
+$paymentRefId = (int)$callback['paymentRefId'];
+$paymentCode  = $callback['paymentCode'];
 
 try {
     $result = $payping->payment()->verify([

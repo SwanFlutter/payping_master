@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-09-11
+
+### Added
+- کلاس جدید `CallbackParser` برای خواندن صحیح فرمت callback پارامترهای v3 که داخل JSON فیلد `data` ارسال می‌شود (`CallbackParser::fromGlobals()` و `CallbackParser::parse()`)
+- سازگاری با هر دو فرمت callback: فرمت فعلی v3 (فیلد `data` با JSON) و فرمت قدیمی (فیلدهای مستقیم)
+- متد کمکی `CallbackParser::isSuccessful()` برای بررسی وضعیت پرداخت
+
+### Fixed
+- اصلاح مستندات callback در `README.md`، `docs/payment.md` و `docs/laravel.md` که قبلاً خواندن مستقیم `$_POST['clientRefId']` را نشان می‌داد — در فرمت فعلی v3 این فیلدها داخل JSON فیلد `data` هستند و مستقیم خواندن آن‌ها باعث باگ می‌شود
+
 ## [1.1.1] — 2026-09-11
 
 ### Fixed

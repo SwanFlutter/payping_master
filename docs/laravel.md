@@ -76,23 +76,25 @@ Route::post('/pay', function (Request $request, PayPing $payping) {
     return redirect()->away($payping->payment()->getStartUrl($response['paymentCode']));
 });
 
-// callback (PayPing اطلاعات را POST می‌کند)
+// callback (PayPing اطلاعات را POST می‌کند — در v3 جزئیات داخل فیلد data با فرمت JSON است)
 Route::post('/payment/callback', function (Request $request, PayPing $payping) {
-    if ((int)$request->input('status') !== 1) {
+    $callback = \SwanFlutter\PayPing\CallbackParser::parse($request->all());
+
+    if (!\SwanFlutter\PayPing\CallbackParser::isSuccessful($callback)) {
         return redirect()->route('checkout')->withErrors('پرداخت لغو شد');
     }
 
-    $order = Order::where('client_ref_id', $request->input('clientRefId'))->firstOrFail();
+    $order = Order::where('client_ref_id', $callback['clientRefId'])->firstOrFail();
 
     try {
         $payping->payment()->verify([
             'amount'       => $order->amount,   // از دیتابیس — نه از ورودی کاربر
             'paymentCode'  => $order->payment_code,
-            'paymentRefId' => (int)$request->input('paymentRefId'),
+            'paymentRefId' => (int)$callback['paymentRefId'],
         ]);
 
         $order->markAsPaid();
-        return 'پرداخت موفق! کد پیگیری: ' . $request->input('paymentRefId');
+        return 'پرداخت موفق! کد پیگیری: ' . $callback['paymentRefId'];
     } catch (PayPingException $e) {
         report($e);
         return redirect()->route('checkout')->withErrors('تأیید پرداخت ناموفق بود');

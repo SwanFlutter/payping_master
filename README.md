@@ -70,21 +70,28 @@ exit;
 
 ### تأیید پرداخت (در callback)
 
-PayPing پس از بازگشت کاربر، این مقادیر را به `returnUrl` شما POST می‌کند:
+PayPing v3 پس از بازگشت کاربر، اطلاعات پرداخت را به‌صورت POST به `returnUrl` شما می‌فرستد.
+طبق فرمت فعلی v3، فیلدهای اصلی `status`، `errorCode` و یک فیلد `data` هستند که جزئیات پرداخت
+به‌صورت JSON داخل آن قرار می‌گیرد. از `CallbackParser` استفاده کنید تا هر دو فرمت (جدید و قدیمی)
+به‌درستی خوانده شوند:
 
 ```php
+use SwanFlutter\PayPing\CallbackParser;
 use SwanFlutter\PayPing\PayPing;
 use SwanFlutter\PayPing\PayPingException;
 
-// PayPing این مقادیر را POST می‌کند:
-$paymentRefId = (int)($_POST['paymentRefId'] ?? 0);
-$paymentCode  = trim($_POST['paymentCode']  ?? '');
-$clientRefId  = trim($_POST['clientRefId']  ?? '');
-$status       = (int)($_POST['status']      ?? 0);
+// $_POST نمونه فرمت v3:
+// ["status" => "1", "errorCode" => "", "data" => '{"clientRefId":"...","paymentCode":"...","paymentRefId":2166036136,"amount":1000,...}']
 
-if ($status !== 1) {
+$callback = CallbackParser::fromGlobals();
+
+if (!CallbackParser::isSuccessful($callback)) {
     die('پرداخت لغو شد');
 }
+
+$clientRefId  = $callback['clientRefId'];   // ✅ درست خوانده می‌شود
+$paymentCode  = $callback['paymentCode'];
+$paymentRefId = (int)$callback['paymentRefId'];
 
 $payping = new PayPing($_ENV['PAYPING_TOKEN']);
 
